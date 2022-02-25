@@ -26,7 +26,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public ApiResult<CustomPage<AddressRespDto>> getAllAddress(Integer page, Integer size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc("name")));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc("region")));
         Page<Address> all = addressRepository.findAll(pageable);
         return ApiResult.successResponse(makeCustomPage(all));
     }
@@ -58,8 +58,14 @@ public class AddressServiceImpl implements AddressService {
         if (byRegionAndDeleted.isPresent()) {
             throw new RestException(("Region name already exist"), HttpStatus.BAD_REQUEST);
         }
-        Address save = addressRepository.save(addressMapper.toAddress(address, dto));
+//        Address save = addressRepository.save(addressMapper.toAddress(address, dto));
 
+        address.setStreet(dto.getStreet());
+        address.setRegion(dto.getRegion());
+        address.setDistrict(dto.getDistrict());
+        address.setDescription(dto.getDescription());
+
+        Address save = addressRepository.save(address);
         return ApiResult.successResponse(addressMapper.toAddressRespDto(save));
     }
 

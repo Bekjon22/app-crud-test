@@ -14,4 +14,5 @@ public interface AddressRepository extends JpaRepository<Address, UUID> {
     Optional<Address> findByRegionAndDeletedAndIdNot(String region, boolean deleted, UUID id);
 
 
+
 }
