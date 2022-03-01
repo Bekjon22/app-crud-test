@@ -17,11 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * @author Osiyo Adilova
- * @project app-eticket-server
- * @since 12/16/2021
- */
+
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
